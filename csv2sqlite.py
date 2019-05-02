@@ -18,22 +18,22 @@ conn = sqlite3.connect(db_name)      # You can create a new database
 c = conn.cursor()                    # The database will be saved in the location where your file is saved
 
 # Create table - signal
-c.execute('''DROP TABLE IF EXISTS SIGNAL''')
-c.execute('''CREATE TABLE SIGNAL
+#c.execute('''DROP TABLE IF EXISTS SIGNAL''')
+c.execute('''CREATE TABLE IF NOT EXISTS SIGNAL 
              ([Signal_ID] integer,
              [Datetime] date, 
              [Event_Code] integer, 
              [Event_Parameter] integer);''')
 
 # create indexs
-c.execute('''CREATE INDEX index_signal ON SIGNAL (Signal_ID); ''')
-c.execute('''CREATE INDEX index_event ON SIGNAL (Event_Code); ''')
+#c.execute('''CREATE INDEX index_signal ON SIGNAL (Signal_ID); ''')
+#c.execute('''CREATE INDEX index_event ON SIGNAL (Event_Code); ''')
 
 conn.commit()
 
 file_folder = "D:\\03_Projects\\git_repository\\datasets\\TSSC2019"
 #signalid_list = [7076,7122,7123,7124,7125,7126,7127,7128,7129,7180,7181,7182,7183,7184,7185,7186,7187,7188,7189,7190,7241,7342]
-signalid_list = [7076,7122,7123,7124,7125,7126,7127,7128,7129,7180,7181,7182]   # test code
+#signalid_list = [7076,7122,7123,7124,7125,7126,7127,7128,7129,7180,7181,7182]   # test code
 signalid_list = [7183,7184,7185,7186,7187,7188,7189,7190,7241,7342]
 #signalid_list = [7076]
 

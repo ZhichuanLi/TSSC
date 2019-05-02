@@ -17,7 +17,7 @@ conn = sqlite3.connect('TSSC.db')
 c = conn.cursor()
 
 # calculate number of event code from 1 to 185
-for i in range(1, 10):
+for i in range(1, 186):
     print(i)
     c.execute('SELECT ifnull(Event_Code, 0) as code, count(Event_Code) as count FROM SIGNAL WHERE Event_Code=?', (i,))
     #print('count of event code: ', c.fetchall())
@@ -32,10 +32,12 @@ conn.close()
 # show the result
 #print(stat_result)    
 dataset = pd.DataFrame({'code':stat_result[:,0],'count':stat_result[:,1]})
+export_csv = dataset.to_csv('event_stat.csv', index=False)
 # remove event code with 0 count
 is_NoneZero = dataset['count'] > 0
 dataset = dataset[is_NoneZero]
 print(dataset)
+
 
 plot = dataset.plot.bar(x='code', y='count', rot=40)
 plot.set_xlabel("Event Code", fontname="Arial", fontsize=8)
